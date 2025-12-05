@@ -2,6 +2,11 @@
 .csv
 .geojson
 
+# Ignore all CSV and GeoJSON in resources
+tethysapp-hello_world/tethysapp/hello_world/resources/*.csv
+tethysapp-hello_world/tethysapp/hello_world/resources/*.geojson
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
