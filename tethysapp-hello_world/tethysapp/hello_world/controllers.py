@@ -1,75 +1,48 @@
+import os
+import json
+from django.shortcuts import render
+from django.http import JsonResponse
 from tethys_sdk.routing import controller
-from tethys_sdk.gizmos import Button
-from .app import App
 
+# Path to the app directory
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
-@controller
-def home(request):
+@controller(name="home")
+def home_page(request):
     """
-    Controller for the app home page.
+    Renders the main home page template.
     """
-    save_button = Button(
-        display_text='',
-        name='save-button',
-        icon='save',
-        style='success',
-        attributes={
-            'data-bs-toggle': 'tooltip',
-            'data-bs-placement': 'top',
-            'title': 'Save'
-        }
-    )
+    return render(request, 'hello_world/home.html')
 
-    edit_button = Button(
-        display_text='',
-        name='edit-button',
-        icon='pen',
-        style='warning',
-        attributes={
-            'data-bs-toggle': 'tooltip',
-            'data-bs-placement': 'top',
-            'title': 'Edit'
-        }
-    )
 
-    remove_button = Button(
-        display_text='',
-        name='remove-button',
-        icon='trash',
-        style='danger',
-        attributes={
-            'data-bs-toggle': 'tooltip',
-            'data-bs-placement': 'top',
-            'title': 'Remove'
-        }
-    )
+@controller(name="map")
+def map_page(request):
+    """
+    Renders the dedicated map page template.
+    """
+    return render(request, 'hello_world/map.html')
 
-    previous_button = Button(
-        display_text='Previous',
-        name='previous-button',
-        attributes={
-            'data-bs-toggle': 'tooltip',
-            'data-bs-placement': 'top',
-            'title': 'Previous'
-        }
-    )
 
-    next_button = Button(
-        display_text='Next',
-        name='next-button',
-        attributes={
-            'data-bs-toggle': 'tooltip',
-            'data-bs-placement': 'top',
-            'title': 'Next'
-        }
-    )
+@controller(name="geojson")
+def serve_geojson(request, feature_file=None):
+    """
+    Serve GeoJSON files from the app's resources folder.
+    
+    If 'feature_file' is provided, it will look in resources/GeoJSON/Features/.
+    Otherwise, it will look in resources/GeoJSON/ for a default GeoJSON.
+    """
+    # Default GeoJSON file if none specified
+    default_geojson = 'WaterRelatedLandUse2010to2015_5951885296121871261.geojson'
 
-    context = {
-        'save_button': save_button,
-        'edit_button': edit_button,
-        'remove_button': remove_button,
-        'previous_button': previous_button,
-        'next_button': next_button
-    }
+    if feature_file:
+        GEOJSON_PATH = os.path.join(APP_DIR, 'resources', 'GeoJSON', 'Features', feature_file)
+    else:
+        GEOJSON_PATH = os.path.join(APP_DIR, 'resources', 'GeoJSON', default_geojson)
 
-    return App.render(request, 'home.html', context)
+    if not os.path.exists(GEOJSON_PATH):
+        return JsonResponse({"error": f"GeoJSON file not found: {GEOJSON_PATH}"}, status=404)
+
+    with open(GEOJSON_PATH, 'r') as f:
+        data = json.load(f)
+
+    return JsonResponse(data)
