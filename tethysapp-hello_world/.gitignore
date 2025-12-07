@@ -2,6 +2,9 @@
 tethysapp-hello_world/tethysapp/hello_world/resources/*.csv
 tethysapp-hello_world/tethysapp/hello_world/resources/*.geojson
 
+tethysapp-hello_world/tethysapp/hello_world/resources/*
+!tethysapp-hello_world/tethysapp/hello_world/resources/.gitkeep
+
 *.pydevproject
 *.project
 *.egg-infocl
