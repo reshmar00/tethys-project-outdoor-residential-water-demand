@@ -16,20 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Fetch GeoJSON on button click
   loadButton.addEventListener('click', () => {
     const selectedYear = yearSelector.value;
 
-    if (!selectedYear) {
-      alert("Please select a year or range first.");
-      return;
-    }
-
-    // Remove old layer if present
     if (geojsonLayer) {
       map.removeLayer(geojsonLayer);
     }
 
-    // Fetch GeoJSON from server
+    if (!selectedYear) return;
+
     fetch(`${GEOJSON_URL}?year=${selectedYear}`)
       .then(res => {
         if (!res.ok) {
