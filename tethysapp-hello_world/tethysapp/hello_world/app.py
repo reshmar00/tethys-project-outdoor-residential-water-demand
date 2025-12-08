@@ -7,7 +7,7 @@ class App(TethysAppBase):
     name = 'Hello World'  # Human-readable app name
     description = 'Hello World Tethys app for demonstrating map and GeoJSON fetching from S3.'
     package = 'hello_world'  # WARNING: Do not change this value
-    index = 'hello_world:home'
+    index = 'home'
     icon = f'{package}/images/icon.gif'
     root_url = 'hello-world'  # URL prefix for the app
     color = '#00FFFF'
