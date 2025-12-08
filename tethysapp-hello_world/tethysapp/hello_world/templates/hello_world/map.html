@@ -33,5 +33,11 @@
   <!-- Leaflet CSS & JS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <script>
+    const GEOJSON_URL = "{% url 'hello_world:geojson' %}";
+  </script>
+  
+  <!-- Main JS -->
   <script src="{% static 'hello_world/js/main.js' %}"></script>
 {% endblock %}
