@@ -1,13 +1,9 @@
-from tethys_sdk.base import controller
 from django.shortcuts import render
 
-@controller(name='home')
 def home_page(request):
+    """Home page view"""
     return render(request, 'hello_world/home.html')
 
-@controller(name='map')
 def map_page(request):
-    """
-    Render simple page with map and plot.
-    """
+    """Map and plot page view"""
     return render(request, 'hello_world/map.html')
