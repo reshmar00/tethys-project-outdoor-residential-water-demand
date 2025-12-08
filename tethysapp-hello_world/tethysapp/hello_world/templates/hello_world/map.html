@@ -1,5 +1,5 @@
 {% extends tethys_app.package|add:"/base.html" %}
-{% load tethys %}
+{% load static tethys %}
 
 {% block app_content %}
 <div class="container my-4">
@@ -39,5 +39,5 @@
       const GEOJSON_URL = "{% url 'hello_world:geojson' %}";
   </script>
 
-  <script src="{% tethys_app|public:'js/main.js' %}"></script>
+  <script src="{% static tethys_app|public:'js/main.js' %}"></script>
 {% endblock %}
