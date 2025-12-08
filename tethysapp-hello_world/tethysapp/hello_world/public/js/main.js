@@ -8,12 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadButton.addEventListener('click', () => {
         const selectedYear = yearSelector.value;
+        if (!selectedYear) return;
 
         if (geojsonLayer) {
             map.removeLayer(geojsonLayer);
         }
-
-        if (!selectedYear) return;
 
         fetch(`${GEOJSON_URL}?year=${selectedYear}`)
         .then(res => res.json())
