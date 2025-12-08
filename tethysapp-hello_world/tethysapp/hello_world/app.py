@@ -39,7 +39,7 @@ class App(TethysAppBase):
             # GeoJSON endpoint (used by JS to fetch data dynamically)
             UrlMap(
                 name='geojson',
-                url='geojson',  # Appends to root_url -> /apps/hello-world/geojson
+                url='geojson/',  # Appends to root_url -> /apps/hello-world/geojson
                 controller='hello_world.controllers.serve_geojson'
             ),
         )
