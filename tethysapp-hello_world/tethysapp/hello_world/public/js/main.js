@@ -15,12 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!selectedYear) return;
 
-        fetch(`/tethysapp/hello_world/geojson/?year=${selectedYear}`)
-            .then(res => res.json())
-            .then(data => {
-                geojsonLayer = L.geoJSON(data).addTo(map);
-                map.fitBounds(geojsonLayer.getBounds());
-            })
-            .catch(err => console.error('Error loading GeoJSON:', err));
+        fetch(`${GEOJSON_URL}?year=${selectedYear}`)
+        .then(res => res.json())
+        .then(data => {
+          if (geojsonLayer) map.removeLayer(geojsonLayer);
+          geojsonLayer = L.geoJSON(data).addTo(map);
+          map.fitBounds(geojsonLayer.getBounds());
+        })
+        .catch(err => console.error('Error loading GeoJSON:', err));
     });
 });
