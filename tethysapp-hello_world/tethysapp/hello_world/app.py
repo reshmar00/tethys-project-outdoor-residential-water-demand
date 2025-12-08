@@ -28,7 +28,7 @@ class App(TethysAppBase):
             # Map page
             UrlMap(
                 name='map',
-                url='map',
+                url='hello-world/map',
                 controller='hello_world.controllers.map_page'
             ),
             # GeoJSON endpoint
