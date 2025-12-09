@@ -9,6 +9,9 @@ tethysapp-hello_world/tethysapp/hello_world/resources/*.geojson
 tethysapp-hello_world/tethysapp/hello_world/resources/*
 !tethysapp-hello_world/tethysapp/hello_world/resources/.gitkeep
 
+# Virtual environments and env variables
+*.env
+*.venv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
