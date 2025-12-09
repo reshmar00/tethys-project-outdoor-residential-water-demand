@@ -1,26 +1,17 @@
-{% load static %}
+{% extends "hello_world/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{{ tethys_app.name }}{% endblock %}</title>
-    {% block app_css %}
-    <link rel="stylesheet" href="{% static 'hello_world/css/main.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    {% endblock %}
-</head>
-<body>
-    <header>
-        <h1>{{ tethys_app.name }}</h1>
-    </header>
+{% block app_content %}
+<div style="margin-bottom: 20px;">
+    <label for="year-selector">Select Year:</label>
+    <select id="year-selector">
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+    </select>
+    <button id="load-map">Go</button>
+</div>
 
-    {% block app_content %}{% endblock %}
+<div id="map" style="width: 100%; height: 400px; margin-bottom: 20px;"></div>
 
-    {% block scripts %}
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{% static 'hello_world/js/main.js' %}"></script>
-    {% endblock %}
-</body>
-</html>
+<canvas id="myChart" width="400" height="200"></canvas>
+{% endblock %}

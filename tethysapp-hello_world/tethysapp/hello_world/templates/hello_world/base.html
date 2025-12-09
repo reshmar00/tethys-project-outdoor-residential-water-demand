@@ -5,7 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{{ tethys_app.name }}{% endblock %}</title>
-    {% block app_css %}{% endblock %}
+    {% block app_css %}
+    <link rel="stylesheet" href="{% static 'hello_world/css/main.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    {% endblock %}
 </head>
 <body>
     <header>
@@ -14,6 +17,10 @@
 
     {% block app_content %}{% endblock %}
 
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'hello_world/js/main.js' %}"></script>
+    {% endblock %}
 </body>
 </html>

@@ -1,40 +1,35 @@
+// tethysapp/hello_world/public/js/main.js
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Leaflet map
+    const map = L.map('map').setView([39.5, -111.5], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    // --- Leaflet Map ---
-    const map = L.map('map').setView([39.5, -111.5], 6); // Center on Utah
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add a simple marker
-    L.marker([39.5, -111.5]).addTo(map)
-        .bindPopup('Hello Utah!')
-        .openPopup();
-
-    // --- Chart.js Plot ---
+    // Chart.js plot
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+            labels: ['Apples', 'Oranges', 'Bananas'],
             datasets: [{
-                label: 'Sample Water Usage (Million Gallons)',
-                data: [120, 135, 110, 145, 130, 150],
-                borderColor: 'rgba(0, 150, 255, 1)',
-                backgroundColor: 'rgba(0, 150, 255, 0.2)',
-                fill: true,
-                tension: 0.3
+                label: 'Fruit Count',
+                data: [12, 19, 7],
+                backgroundColor: ['red','orange','yellow']
             }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: true },
-                title: { display: true, text: 'Annual Water Usage' }
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
         }
+    });
+
+    // Button to update map
+    const yearSelector = document.getElementById('year-selector');
+    const loadButton = document.getElementById('load-map');
+
+    loadButton.addEventListener('click', () => {
+        const year = yearSelector.value;
+        alert("You selected year: " + year);
+
+        // Example marker
+        L.marker([39.5, -111.5]).addTo(map)
+            .bindPopup(`Year: ${year}`)
+            .openPopup();
     });
 });
